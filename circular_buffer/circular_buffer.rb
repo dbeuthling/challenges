@@ -43,10 +43,11 @@ class CircularBuffer
     if  @buffer.include?([])
       write(str)
     else
+      return if str.nil?
       _index = @buffer.index(["#{@in_order[0]}"])
-      @buffer[_index] = [str] unless str == nil
-      @in_order.delete_at(0) unless str == nil
-      @in_order << str unless str == nil
+      @buffer[_index] = [str]
+      @in_order.delete_at(0)
+      @in_order << str
     end
   end
 
@@ -59,32 +60,3 @@ class CircularBuffer
     @in_order << write
   end
 end
-
-# p new = CircularBuffer.new(2)
-# new.write(nil)
-# new.write('2')
-# p new
-# new.clear
-# p new
-# puts new.read
-# p new
-
-# buffer = CircularBuffer.new(5)
-# ('1'..'3').each { |i| buffer.write i }
-# p buffer
-# buffer.write!('six')
-# p buffer
-
-
-# buffer = CircularBuffer.new(3)
-# buffer.write '1'
-# buffer.write '2'
-# buffer.write nil
-# p buffer
-# buffer.read
-# p buffer
-# buffer.write! 'A'
-# p buffer
-# buffer.read
-# p buffer
-# assert_equal 'A', buffer.read
