@@ -21,7 +21,7 @@ class Robot
         reset
         break unless @@array_of_names.include?(@robot_name)
       end
-      p @@array_of_names << @robot_name
+      @@array_of_names << @robot_name
     end
     @robot_name
   end
